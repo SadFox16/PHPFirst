@@ -16,7 +16,8 @@ class MainController extends Controller{
     }
 
     public function review(){
-        return view('review');
+        $reviews = new ContactModel();
+        return view('review', ['reviews' => $reviews->all()]);
     }
 
     public function review_check(Request $request){
@@ -32,5 +33,7 @@ class MainController extends Controller{
         $review->message = $request->input('message');
 
         $review->save();
+
+        return redirect()->route('review');
     }
 }
